@@ -13,6 +13,7 @@ var MusicContainer = React.createClass({
   },
   playNote: function (key) {
     keyboard.play(key.keyCode);
+    console.log(key.keyCode);
   },
   releaseNote: function (key) {
     keyboard.stop(key.keyCode);

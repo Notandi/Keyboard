@@ -3,18 +3,40 @@ var Tone = require('tone');
 
 
 function Keyboard () {
-  this.synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+  this.synth = new Tone.PolySynth(13, Tone.Synth).toMaster();
 
 }
 
 Keyboard.prototype.activekeys = [];
 Keyboard.prototype.keyMap = {
   65: 'C3',
-  83: 'G3'
+  87: 'C#3',
+  83: 'D3',
+  69: 'D#3',
+  68: 'E3',
+  70: 'F3',
+  84: 'F#3',
+  71: 'G3',
+  89: 'G#3',
+  72: 'A3',
+  85: 'A#3',
+  74: 'B3',
+  75: 'C4'
 };
 Keyboard.prototype.notes = {
-  C3: true,
-  G3: true
+  65: true,
+  87: true,
+  83: true,
+  69: true,
+  68: true,
+  70: true,
+  84: true,
+  71: true,
+  89: true,
+  72: true,
+  85: true,
+  74: true,
+  75: true
 }
 
 Keyboard.prototype.autoWah;
@@ -67,7 +89,7 @@ Keyboard.prototype.wantToStop = function (note){
 
 Keyboard.prototype.play = function (key) {
   var note = this.findNote(key);
-  var canPlay = this.wantToPlay(note);
+  var canPlay = this.wantToPlay(key);
   if (note && canPlay) {
     this.synth.triggerAttack(note,undefined,0.2)
   }
@@ -77,11 +99,8 @@ Keyboard.prototype.arpegiate = function () {
 }
 
 Keyboard.prototype.stop = function (key) {
-  //var note = findNote(key);
-  //this.synth.triggerAttack('C3',"+2n");
-  // Keyboard.synth.triggerRelease(["Ab3", "C4"], "+2n");
   var note = this.findNote(key);
-  var canPlay = this.wantToStop(note);
+  var canPlay = this.wantToStop(key);
   if (note && !canPlay) {
     this.synth.triggerRelease(note, undefined);
   }
