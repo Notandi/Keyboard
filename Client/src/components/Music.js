@@ -10,7 +10,26 @@ function Music (props) {
           onKeyDown={(e) => props.onPlayNote(e)}
           onKeyUp={(e) => props.onReleaseNote(e)}
         />
-      <button type='button' className='btn btn-lg btn-success'> play Music</button>
+      <div className="piano">
+        <div className="key">
+          <div className="black-key"></div>
+        </div>
+        <div className="key">
+          <div className="black-key"></div>
+        </div>
+        <div className="key"></div>
+        <div className="key">
+          <div className="black-key"></div>
+        </div>
+        <div className="key">
+          <div className="black-key"></div>
+        </div>
+        <div className="key">
+          <div className="black-key"></div>
+        </div>
+        <div className="key"></div>
+        <div className="key"></div>
+      </div>
     </div>
   )
 }
