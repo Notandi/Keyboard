@@ -16,6 +16,7 @@ var Home = React.createClass({
         <p>Velkominn á síðun key-board.herokuapp.com þessi síða var búinn til af Óskar Ólafssyni </p>
         <p> Hér er hægt að spila á virtual lyklaborð og leika sér með effect á því, þetta verkefni var unnið 9-12 Febrúar 2017  </p>
         <p>Þessi síða notast við <a href="https://tonejs.github.io/">Tone.js</a> frameworkið til þess að spila hljóð og gera effecta síðan sjálf notast líka við React á framendanum, síðan sjálf er aðalega framendi því ekki var neinn tilgangur fyrir því að hafa bakenda á henni</p>
+        <p>notaði <a href="https://github.com/oliviertassinari/react-event-listener">react-event-listener</a> til þess að hlusta á keyboard events globally á dominu</p>
       </div>
     )
   }
