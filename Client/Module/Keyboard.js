@@ -12,6 +12,10 @@ Keyboard.prototype.keyMap = {
   65: 'C3',
   83: 'G3'
 };
+Keyboard.prototype.notes = {
+  C3: true,
+  G3: true
+}
 
 Keyboard.prototype.autoWah;
 Keyboard.prototype.bitCrusher;
@@ -23,17 +27,50 @@ Keyboard.prototype.freeverb;
 Keyboard.prototype.phaser;
 Keyboard.prototype.pingPongDelay;
 
+
+// laga þetta fall
 Keyboard.prototype.findNote = function (key){
-  //finna nótu laga seinna
-  return 'C3';
+  for (name in this.keyMap){
+    if (key === Number(name)) {
+      return this.keyMap[name];
+    }
+  }
+  return false;
 }
 
-Keyboard.prototype.play = function () {
-  // var note = findNote(key);
-  console.log(this.synth);
-  this.synth.triggerAttack('C3',undefined,0.2)
-  // Keyboard.synth.triggerAttack(["Ab3", "C4", "F5"], undefined, 0.2);
-  // Keyboard.synth.triggerRelease(["Ab3", "C4"], "+2n");
+//laga þetta líka gera betur
+Keyboard.prototype.wantToPlay = function (note){
+  for (name in this.notes){
+    if (String(note) === String(name)) {
+      if (this.notes[name]){
+        this.notes[name] = false
+        return true;
+      }
+      return false;
+    }
+  }
+  return false;
+}
+
+Keyboard.prototype.wantToStop = function (note){
+  for (name in this.notes){
+    if (String(note) === String(name)) {
+      if (!this.notes[name]){
+        this.notes[name] = true;
+        return false;
+      }
+      return true;
+    }
+  }
+  return true;
+}
+
+Keyboard.prototype.play = function (key) {
+  var note = this.findNote(key);
+  var canPlay = this.wantToPlay(note);
+  if (note && canPlay) {
+    this.synth.triggerAttack(note,undefined,0.2)
+  }
 }
 
 Keyboard.prototype.arpegiate = function () {
@@ -41,8 +78,13 @@ Keyboard.prototype.arpegiate = function () {
 
 Keyboard.prototype.stop = function (key) {
   //var note = findNote(key);
-  this.synth.triggerAttack('C3',"+2n");
+  //this.synth.triggerAttack('C3',"+2n");
   // Keyboard.synth.triggerRelease(["Ab3", "C4"], "+2n");
+  var note = this.findNote(key);
+  var canPlay = this.wantToStop(note);
+  if (note && !canPlay) {
+    this.synth.triggerRelease(note, undefined);
+  }
 }
 
 Keyboard.prototype.addAutoWah = function () {

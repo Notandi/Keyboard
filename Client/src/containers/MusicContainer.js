@@ -12,12 +12,10 @@ var MusicContainer = React.createClass({
     //keyboard.setContext(new AudioContext());
   },
   playNote: function (key) {
-    keyboard.play();
-    console.log(key.keyCode);
+    keyboard.play(key.keyCode);
   },
   releaseNote: function (key) {
-    keyboard.stop();
-    console.log(key.keyCode);
+    keyboard.stop(key.keyCode);
   },
   render: function () {
     return (
