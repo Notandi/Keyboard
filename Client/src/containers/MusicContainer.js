@@ -11,13 +11,19 @@ var MusicContainer = React.createClass({
   componentDidMount: function () {
     //keyboard.setContext(new AudioContext());
   },
-  playMusic: function () {
+  playNote: function (key) {
     keyboard.play();
+    console.log(key.keyCode);
+  },
+  releaseNote: function (key) {
+    keyboard.stop();
+    console.log(key.keyCode);
   },
   render: function () {
     return (
       <Music
-        onPlayMusic={this.playMusic}/>
+        onPlayNote={this.playNote}
+        onReleaseNote={this.releaseNote}/>
     )
   }
 })

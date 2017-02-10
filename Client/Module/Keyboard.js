@@ -3,19 +3,16 @@ var Tone = require('tone');
 
 
 function Keyboard () {
-  Keyboard.synth = new Tone.Synth({
-    "oscillator" : {
-        "type" : "pwm",
-        "modulationFrequency" : 0.2
-    },
-    "envelope" : {
-        "attack" : 0.02,
-        "decay" : 0.1,
-        "sustain" : 0.2,
-        "release" : 0.9,
-    }
-  }).toMaster();
+  this.synth = new Tone.PolySynth(6, Tone.Synth).toMaster();
+
 }
+
+Keyboard.prototype.activekeys = [];
+Keyboard.prototype.keyMap = {
+  65: 'C3',
+  83: 'G3'
+};
+
 Keyboard.prototype.autoWah;
 Keyboard.prototype.bitCrusher;
 Keyboard.prototype.chebyShev;
@@ -26,75 +23,87 @@ Keyboard.prototype.freeverb;
 Keyboard.prototype.phaser;
 Keyboard.prototype.pingPongDelay;
 
-Keyboard.prototype.play = function (key, freq) {
-  Keyboard.synth.triggerAttack('C3');
+Keyboard.prototype.findNote = function (key){
+  //finna nótu laga seinna
+  return 'C3';
+}
 
+Keyboard.prototype.play = function () {
+  // var note = findNote(key);
+  console.log(this.synth);
+  this.synth.triggerAttack('C3',undefined,0.2)
+  // Keyboard.synth.triggerAttack(["Ab3", "C4", "F5"], undefined, 0.2);
+  // Keyboard.synth.triggerRelease(["Ab3", "C4"], "+2n");
 }
 
 Keyboard.prototype.arpegiate = function () {
 }
 
 Keyboard.prototype.stop = function (key) {
-}
-
-Keyboard.prototype.showContext = function () {
+  //var note = findNote(key);
+  this.synth.triggerAttack('C3',"+2n");
+  // Keyboard.synth.triggerRelease(["Ab3", "C4"], "+2n");
 }
 
 Keyboard.prototype.addAutoWah = function () {
-  Keyboard.autoWah = new Tone.AutoWah(50, 6, -30).toMaster();
+  this.autoWah = new Tone.AutoWah(50, 6, -30).toMaster();
   //initialize the synth and connect to autowah
-  Keyboard.synth.connect(Keyboard.autoWah);
+  this.synth.connect(this.autoWah);
   //Q value influences the effect of the wah - default is 2
-  Keyboard.autoWah.Q.value = 6;
+  this.autoWah.Q.value = 6;
 }
 
 Keyboard.prototype.addBitCrusher = function () {
-  Keyboard.bitCrusher = new Tone.BitCrusher(4).toMaster();
-  Keyboard.synth.connect(Keyboard.bitCrusher);
+  this.bitCrusher = new Tone.BitCrusher(4).toMaster();
+  this.synth.connect(this.bitCrusher);
 }
 
 Keyboard.prototype.addChebyshev = function () {
   //create a new cheby
-  Keyboard.Chebyshev = new Tone.Chebyshev(50);
+  this.Chebyshev = new Tone.Chebyshev(50);
   //create a monosynth connected to our cheby
-  Keyboard.synth.connect(Keyboard.chebyShev);
+  this.synth.connect(this.chebyShev);
 }
 
 Keyboard.prototype.addChorus = function () {
-  Keyboard.chorus = new Tone.Chorus(4, 2.5, 0.5);
-  Keyboard.synth.connect(Keyboard.chorus);
+  this.chorus = new Tone.Chorus(4, 2.5, 0.5);
+  this.synth.connect(this.chorus);
 }
 
 Keyboard.prototype.addDistortion = function () {
-  Keyboard.distortion = new Tone.Distortion(0.8).toMaster();
-  Keyboard.synth.connect(Keyboard.distortion);
+  this.distortion = new Tone.Distortion(0.8).toMaster();
+  this.synth.connect(this.distortion);
 }
 
 Keyboard.prototype.addFeedbackDelay = function () {
-  Keyboard.feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
-  Keyboard.synth.connect(Keyboard.feedbackDelay);
+  this.feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
+  this.synth.connect(this.feedbackDelay);
 }
 
 Keyboard.prototype.addFreeverb = function () {
-  Keyboard.freeverb = new Tone.Freeverb().toMaster();
-  Keyboard.freeverb.dampening.value = 1000;
+  this.freeverb = new Tone.Freeverb().toMaster();
+  this.freeverb.dampening.value = 1000;
   //routing synth through the reverb
-  Keyboard.synth.connect(Keyboard.freeverb);
+  this.synth.connect(this.freeverb);
 }
 
 Keyboard.prototype.addPhaser = function () {
-  Keyboard.phaser = new Tone.Phaser({
+  this.phaser = new Tone.Phaser({
 	"frequency" : 15,
 	"octaves" : 5,
 	"baseFrequency" : 1000
   }).toMaster();
-  Keyboard.synth.connect(Keyboard.phaser);
+  this.synth.connect(this.phaser);
 }
 
 Keyboard.prototype.addPingPongDelay = function () {
-  Keyboard.pingPongDelay = new Tone.PingPongDelay("4n", 0.2).toMaster();
-  Keyboard.synth.connect(Keyboard.pingPongDelay);
+  this.pingPongDelay = new Tone.PingPongDelay("4n", 0.2).toMaster();
+  this.synth.connect(this.pingPongDelay);
 }
+
+
+module.exports = Keyboard;
+
 
 
 
@@ -151,7 +160,3 @@ Keyboard.prototype.addPingPongDelay = function () {
 // Keyboard.prototype.addVibrato = function () {
 //
 // }
-
-
-
-module.exports = Keyboard;
