@@ -1,29 +1,52 @@
-var React = require('react');
-var Music = require('../components/Music');
-var Synth = require('../../Module/Keyboard');
+import React from 'react';
+import Music from '../components/Music';
+import Synth from '../../Module/Keyboard';
 var keyboard = new Synth();
 
-
-var MusicContainer = React.createClass({
-  contextTypes: {
+class MusicContainer extends React.Component {
+  static contextTypes = {
     router: React.PropTypes.object.isRequired
-  },
-  componentDidMount: function () {
-    //keyboard.setContext(new AudioContext());
-  },
-  playNote: function (key) {
+  }
+
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      active: "key active",
+      autoWah: 0,
+      bitCrusher: 0,
+      chebyShev: 0,
+      chorus: 0,
+      distortion: 0,
+      feedbackDelay: 0,
+      freeverb: 0,
+      phaser: 0,
+      pingPongDelay: 0
+    }
+  }
+
+  playNote (key) {
     keyboard.play(key.keyCode);
-  },
-  releaseNote: function (key) {
+  }
+
+  releaseNote (key) {
     keyboard.stop(key.keyCode);
-  },
-  render: function () {
+  }
+
+  phaser (){
+    keyboard.addBitCrusher();
+    console.log('dist');
+  }
+
+  render () {
     return (
       <Music
         onPlayNote={this.playNote}
-        onReleaseNote={this.releaseNote}/>
+        onReleaseNote={this.releaseNote}
+        onPhaser={this.phaser}
+        keyboardState={this.state}/>
     )
   }
-})
+};
 
 module.exports = MusicContainer;

@@ -115,8 +115,15 @@ Keyboard.prototype.addAutoWah = function () {
 }
 
 Keyboard.prototype.addBitCrusher = function () {
-  this.bitCrusher = new Tone.BitCrusher(4).toMaster();
-  this.synth.connect(this.bitCrusher);
+  if(this.bitCrusher){
+    this.bitCrusher.dispose();
+    this.bitCrusher = new Tone.BitCrusher(4).toMaster();
+    this.synth.connect(this.bitCrusher);
+
+  }else {
+    this.bitCrusher = new Tone.BitCrusher(4).toMaster();
+    this.synth.connect(this.bitCrusher);
+  }
 }
 
 Keyboard.prototype.addChebyshev = function () {
@@ -149,12 +156,23 @@ Keyboard.prototype.addFreeverb = function () {
 }
 
 Keyboard.prototype.addPhaser = function () {
-  this.phaser = new Tone.Phaser({
-	"frequency" : 15,
-	"octaves" : 5,
-	"baseFrequency" : 1000
-  }).toMaster();
-  this.synth.connect(this.phaser);
+  if(this.phaser){
+    this.phaser.dispose();
+    this.phaser = new Tone.Phaser({
+    	"frequency" : 200,
+    	"octaves" : 8,
+    	"baseFrequency" : 2000
+    }).toMaster();
+    this.synth.connect(this.phaser);
+    console.log(this.phaser);
+  }else{
+    this.phaser = new Tone.Phaser({
+  	"frequency" : 15,
+  	"octaves" : 5,
+  	"baseFrequency" : 1000
+    }).toMaster();
+    this.synth.connect(this.phaser);
+  }
 }
 
 Keyboard.prototype.addPingPongDelay = function () {
