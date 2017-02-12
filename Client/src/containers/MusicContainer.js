@@ -12,7 +12,19 @@ class MusicContainer extends React.Component {
     super(props);
 
     this.state = {
-      active: "key active",
+      key1: "",
+      key2: "",
+      key3: "",
+      key4: "",
+      key5: "",
+      key6: "",
+      key7: "",
+      key8: "",
+      key9: "",
+      key10: "",
+      key11: "",
+      key12: "",
+      slider: 0,
       autoWah: 0,
       bitCrusher: 0,
       chebyShev: 0,
@@ -23,6 +35,10 @@ class MusicContainer extends React.Component {
       phaser: 0,
       pingPongDelay: 0
     }
+  }
+
+  volume(value){
+    keyboard.setVolume(value);
   }
 
   playNote (key) {
@@ -44,7 +60,8 @@ class MusicContainer extends React.Component {
         onPlayNote={this.playNote}
         onReleaseNote={this.releaseNote}
         onPhaser={this.phaser}
-        keyboardState={this.state}/>
+        keyboardState={this.state}
+        setVolume={this.volume}/>
     )
   }
 };

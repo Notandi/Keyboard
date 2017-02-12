@@ -50,6 +50,10 @@ Keyboard.prototype.phaser;
 Keyboard.prototype.pingPongDelay;
 
 
+Keyboard.prototype.setVolume = function (value){
+  this.synth.volume.value = value
+}
+
 // laga þetta fall
 Keyboard.prototype.findNote = function (key){
   for (name in this.keyMap){
