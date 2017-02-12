@@ -14,8 +14,6 @@ function Music (props) {
   	    	<div className="piano">
   	    		<div className="effects">
   	    			<div className="phaser">
-              
-
               </div>
   	    		</div>
   	    		<div className="keys">
