@@ -32,10 +32,6 @@ body {
   flex-direction: row;
   min-height: 50%;
 }
-.piano .effects .phaser {
-  display: flex;
-  flex-direction: row;
-}
 .piano .keys {
   display: flex;
   flex-direction: row;
@@ -67,7 +63,7 @@ body {
   border-bottom-right-radius: 5px;
 }
 
-input[type="range"] {
-  height: 3px;
-  width: 60px;
+.rc-slider.rc-slider-vertical{
+  height: 50px;
+  margin-top: 10px;
 }

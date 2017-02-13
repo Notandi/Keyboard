@@ -14,8 +14,8 @@ function Music (props) {
         <div className="pianoplacer">
   	    	<div className="piano">
   	    		<div className="effects">
-  	    			<div className="phaser">
-              <Slider vertical min={0} max={10} included={false} defaultValue={0} onChange={props.setVolume}/>
+  	    			<div className="volume">
+              <Slider vertical min={0} max={10} included={false} defaultValue={10} onChange={props.setVolume}/>
               </div>
   	    		</div>
   	    		<div className="keys">

@@ -4,6 +4,7 @@ var Tone = require('tone');
 
 function Keyboard () {
   this.synth = new Tone.PolySynth(13, Tone.Synth).toMaster();
+  this.synth.volume.value = 10;
 
 }
 
