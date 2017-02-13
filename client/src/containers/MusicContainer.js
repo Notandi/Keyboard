@@ -37,8 +37,12 @@ class MusicContainer extends React.Component {
     }
   }
 
-  volume(value){
-    keyboard.setVolume(value);
+  bitCrush(value){
+    keyboard.addBitCrusher(value);
+  }
+  distortion(value){
+    var val = value/10;
+    keyboard.addDistortion(val);
   }
 
   playNote (key) {
@@ -61,7 +65,9 @@ class MusicContainer extends React.Component {
         onReleaseNote={this.releaseNote}
         onPhaser={this.phaser}
         keyboardState={this.state}
-        setVolume={this.volume}/>
+        setVolume={this.volume}
+        setBitcrush={this.bitCrush}
+        setDistortion={this.distortion}/>
     )
   }
 };

@@ -14,8 +14,11 @@ function Music (props) {
         <div className="pianoplacer">
   	    	<div className="piano">
   	    		<div className="effects">
-  	    			<div className="volume">
-              <Slider vertical min={0} max={10} included={false} defaultValue={10} onChange={props.setVolume}/>
+              <div className="bitCrusher">
+                <Slider vertical min={0} max={8} included={false} defaultValue={0} onChange={props.setBitcrush}/>
+              </div>
+              <div className="distortion">
+                <Slider vertical min={0} max={8} included={false} defaultValue={0} onChange={props.setDistortion}/>
               </div>
   	    		</div>
   	    		<div className="keys">
@@ -43,7 +46,8 @@ Music.propTypes = {
   onReleaseNote: PropTypes.func.isRequired,
   onPhaser: PropTypes.func.isRequired,
   keyboardState: PropTypes.object.isRequired,
-  setVolume: PropTypes.func.isRequired,
+  setBitcrush: PropTypes.func.isRequired,
+  setDistortion: PropTypes.func.isRequired,
 }
 
 module.exports = Music;

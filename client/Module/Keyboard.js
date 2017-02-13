@@ -4,7 +4,6 @@ var Tone = require('tone');
 
 function Keyboard () {
   this.synth = new Tone.PolySynth(13, Tone.Synth).toMaster();
-  this.synth.volume.value = 10;
 
 }
 
@@ -119,14 +118,11 @@ Keyboard.prototype.addAutoWah = function () {
   this.autoWah.Q.value = 6;
 }
 
-Keyboard.prototype.addBitCrusher = function () {
+Keyboard.prototype.addBitCrusher = function (value) {
   if(this.bitCrusher){
-    this.bitCrusher.dispose();
-    this.bitCrusher = new Tone.BitCrusher(4).toMaster();
-    this.synth.connect(this.bitCrusher);
-
+    this.bitCrusher.bits = value;
   }else {
-    this.bitCrusher = new Tone.BitCrusher(4).toMaster();
+    this.bitCrusher = new Tone.BitCrusher(value).toMaster();
     this.synth.connect(this.bitCrusher);
   }
 }
@@ -143,9 +139,13 @@ Keyboard.prototype.addChorus = function () {
   this.synth.connect(this.chorus);
 }
 
-Keyboard.prototype.addDistortion = function () {
-  this.distortion = new Tone.Distortion(0.8).toMaster();
-  this.synth.connect(this.distortion);
+Keyboard.prototype.addDistortion = function (value) {
+  if (this.distortion){
+    this.distortion.distortion = value;
+  } else {
+    this.distortion = new Tone.Distortion(value).toMaster();
+    this.synth.connect(this.distortion);
+  }
 }
 
 Keyboard.prototype.addFeedbackDelay = function () {
