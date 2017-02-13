@@ -67,3 +67,10 @@ body {
   height: 50px;
   margin-top: 10px;
 }
+
+.github {
+  width: 20px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

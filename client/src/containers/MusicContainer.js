@@ -37,6 +37,15 @@ class MusicContainer extends React.Component {
     }
   }
 
+  volume(value){
+    keyboard.setVolume(value);
+  }
+
+  delay(value){
+    var val = value/10;
+    keyboard.addFeedbackDelay(val);
+  }
+
   bitCrush(value){
     keyboard.addBitCrusher(value);
   }
@@ -67,7 +76,8 @@ class MusicContainer extends React.Component {
         keyboardState={this.state}
         setVolume={this.volume}
         setBitcrush={this.bitCrush}
-        setDistortion={this.distortion}/>
+        setDistortion={this.distortion}
+        setDelay={this.delay}/>
     )
   }
 };

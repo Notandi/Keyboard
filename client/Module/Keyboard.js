@@ -3,7 +3,8 @@ var Tone = require('tone');
 
 
 function Keyboard () {
-  this.synth = new Tone.PolySynth(13, Tone.Synth).toMaster();
+  this.synth = new Tone.PolySynth(8, Tone.Synth).toMaster();
+  this.synth.volume.value=10;
 
 }
 
@@ -144,13 +145,18 @@ Keyboard.prototype.addDistortion = function (value) {
     this.distortion.distortion = value;
   } else {
     this.distortion = new Tone.Distortion(value).toMaster();
+    this.distortion.oversample = "4x";
     this.synth.connect(this.distortion);
   }
 }
 
-Keyboard.prototype.addFeedbackDelay = function () {
-  this.feedbackDelay = new Tone.FeedbackDelay("8n", 0.5).toMaster();
-  this.synth.connect(this.feedbackDelay);
+Keyboard.prototype.addFeedbackDelay = function (value) {
+  if (this.feedbackDelay){
+    this.feedbackDelay.delayTime = value;
+  }else{
+    this.feedbackDelay = new Tone.FeedbackDelay(value, 0.5).toMaster();
+    this.synth.connect(this.feedbackDelay);
+  }
 }
 
 Keyboard.prototype.addFreeverb = function () {
@@ -187,60 +193,3 @@ Keyboard.prototype.addPingPongDelay = function () {
 
 
 module.exports = Keyboard;
-
-
-
-
-
-// Keyboard.prototype.addConvolver = function () {
-//
-// }
-// Keyboard.prototype.addFeedbackEffect = function () {
-//
-// }
-// Keyboard.prototype.jcReverb;
-// Keyboard.prototype.addJCReverb = function () {
-//   var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
-//   var delay = new Tone.FeedbackDelay(0.5);
-//   //connecting the synth to reverb through delay
-//   var synth = new Tone.DuoKeyboard().chain(delay, reverb);
-//   synth.triggerAttackRelease("A4","8n");
-// }
-
-// Keyboard.prototype.addMidSideEffect = function () {
-//
-// }
-// Keyboard.prototype.addAutoFilter = function () {
-//
-// }
-//
-// Keyboard.prototype.addAutoPanner = function () {
-//
-// }
-// Keyboard.prototype.addPitchShift = function () {
-//
-// }
-//
-// Keyboard.prototype.addStereoEffect = function () {
-//
-// }
-//
-// Keyboard.prototype.addStereoFeedbackEffect = function () {
-//
-// }
-//
-// Keyboard.prototype.addStereoWidener = function () {
-//
-// }
-//
-// Keyboard.prototype.addStereoXFeedbackEffect = function () {
-//
-// }
-//
-// Keyboard.prototype.addTremolo = function () {
-//
-// }
-//
-// Keyboard.prototype.addVibrato = function () {
-//
-// }

@@ -11,14 +11,21 @@ function Music (props) {
           onKeyDown={(e) => props.onPlayNote(e)}
           onKeyUp={(e) => props.onReleaseNote(e)}
         />
+        <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" /></a>
         <div className="pianoplacer">
   	    	<div className="piano">
   	    		<div className="effects">
+  	    			<div className="volume">
+              <Slider vertical min={0} max={10} included={false} defaultValue={10} onChange={props.setVolume}/>
+              </div>
               <div className="bitCrusher">
                 <Slider vertical min={0} max={8} included={false} defaultValue={0} onChange={props.setBitcrush}/>
               </div>
               <div className="distortion">
-                <Slider vertical min={0} max={8} included={false} defaultValue={0} onChange={props.setDistortion}/>
+                <Slider vertical min={0} max={10} included={false} defaultValue={0} onChange={props.setDistortion}/>
+              </div>
+              <div className="delay">
+                <Slider vertical min={0} max={100} included={false} defaultValue={0} onChange={props.setDelay}/>
               </div>
   	    		</div>
   	    		<div className="keys">
@@ -46,8 +53,10 @@ Music.propTypes = {
   onReleaseNote: PropTypes.func.isRequired,
   onPhaser: PropTypes.func.isRequired,
   keyboardState: PropTypes.object.isRequired,
+  setVolume: PropTypes.func.isRequired,
   setBitcrush: PropTypes.func.isRequired,
   setDistortion: PropTypes.func.isRequired,
+  setDelay: PropTypes.func.isRequired,
 }
 
 module.exports = Music;
