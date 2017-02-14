@@ -6,6 +6,18 @@ body {
   background: linear-gradient(45deg, #FF5D78 10%, #1E86B2 90%);
   height: 100vh;
 
+
+
+}
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 5em;
+
+
+}
+p {
+  font-family: 'VT323', monospace;
+  font-size: 2em;
 }
 
 .pianoplacer{
@@ -86,5 +98,5 @@ body {
   position: absolute;
    top: 15px;
    text-align: center;
-   width: 100%;
+   width: 100vw;
 }

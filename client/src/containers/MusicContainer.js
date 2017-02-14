@@ -3,7 +3,7 @@ import Music from '../components/Music';
 import Synth from '../../Module/Keyboard';
 var keyboard = new Synth();
 
-var map = {
+var keyMap = {
   65: "key1",
   87: "key2",
   83: "key3",
@@ -73,9 +73,9 @@ class MusicContainer extends React.Component {
   playNote (input) {
     var keystroke = input.keyCode;
     keyboard.play(keystroke);
-    for (var k in map) {
-      if (Number(k) === Number(keystroke)) {
-          var key = map[k];
+    for (var code in keyMap) {
+      if (Number(code) === Number(keystroke)) {
+          var key = keyMap[code];
           var obj = {};
           obj[key] = 'active';
           this.setState(obj);
@@ -86,9 +86,9 @@ class MusicContainer extends React.Component {
   releaseNote (input) {
     var keystroke = input.keyCode;
     keyboard.stop(keystroke);
-    for (var k in map) {
-      if (Number(k) === Number(keystroke)) {
-          var key = map[k];
+    for (var code in keyMap) {
+      if (Number(code) === Number(keystroke)) {
+          var key = keyMap[code];
           var obj = {};
           obj[key] = '';
           this.setState(obj);

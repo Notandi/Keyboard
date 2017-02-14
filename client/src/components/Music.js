@@ -13,6 +13,7 @@ function Music (props) {
         />
         <div className="textplacer">
           <h1>Keyboard</h1>
+          <p>use the keys "a s d f g h j" to play the light keys and the keys "w e t y u" to play the dark keys</p>
         </div>
         <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" /></a>
         <div className="pianoplacer">

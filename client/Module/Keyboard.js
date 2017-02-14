@@ -10,18 +10,18 @@ function Keyboard () {
 
 Keyboard.prototype.activekeys = [];
 Keyboard.prototype.keyMap = {
-  65: 'C3',
-  87: 'C#3',
-  83: 'D3',
-  69: 'D#3',
-  68: 'E3',
-  70: 'F3',
-  84: 'F#3',
-  71: 'G3',
-  89: 'G#3',
-  72: 'A3',
-  85: 'A#3',
-  74: 'B3'
+  65: 'C4',
+  87: 'C#4',
+  83: 'D4',
+  69: 'D#4',
+  68: 'E4',
+  70: 'F4',
+  84: 'F#4',
+  71: 'G4',
+  89: 'G#4',
+  72: 'A4',
+  85: 'A#4',
+  74: 'B4'
 };
 Keyboard.prototype.notes = {
   65: true,
