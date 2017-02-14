@@ -11,6 +11,9 @@ function Music (props) {
           onKeyDown={(e) => props.onPlayNote(e)}
           onKeyUp={(e) => props.onReleaseNote(e)}
         />
+        <div className="textplacer">
+          <h1>Keyboard</h1>
+        </div>
         <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" /></a>
         <div className="pianoplacer">
   	    	<div className="piano">

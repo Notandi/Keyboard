@@ -21,8 +21,7 @@ Keyboard.prototype.keyMap = {
   89: 'G#3',
   72: 'A3',
   85: 'A#3',
-  74: 'B3',
-  75: 'C4'
+  74: 'B3'
 };
 Keyboard.prototype.notes = {
   65: true,
@@ -36,8 +35,7 @@ Keyboard.prototype.notes = {
   89: true,
   72: true,
   85: true,
-  74: true,
-  75: true
+  74: true
 }
 
 Keyboard.prototype.autoWah;
