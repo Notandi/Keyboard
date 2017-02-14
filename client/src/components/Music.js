@@ -1,7 +1,6 @@
 import React from 'react';
 var PropTypes = React.PropTypes;
 import EventListener from 'react-event-listener';
-import Slider, { Range } from 'rc-slider';
 
 function Music (props) {
   return (
@@ -13,10 +12,10 @@ function Music (props) {
         />
         <div className="textplacer">
           <h1>Keyboard</h1>
-          <p>use the keys "s d f g h j k" to play the white keys and  "e r y u i" to play the black keys</p>
-          <p>use the key "a" to go down an octave and "l" to go up an octave</p>
+          <p>use the keys "a s d f g h j" to play the white keys and  "w e t y u " to play the black keys</p>
+          <p>use the key "q" to go down an octave and "i" to go up an octave</p>
         </div>
-        <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" /></a>
+        <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" alt="github" /></a>
         <div className="pianoplacer">
   	    	<div className="piano">
   	    		<div className="effects">
@@ -51,12 +50,7 @@ function Music (props) {
 Music.propTypes = {
   onPlayNote: PropTypes.func.isRequired,
   onReleaseNote: PropTypes.func.isRequired,
-  onPhaser: PropTypes.func.isRequired,
   keyboardState: PropTypes.object.isRequired,
-  setVolume: PropTypes.func.isRequired,
-  setBitcrush: PropTypes.func.isRequired,
-  setDistortion: PropTypes.func.isRequired,
-  setDelay: PropTypes.func.isRequired,
   setWaveFormRight: PropTypes.func.isRequired,
   setWaveFormLeft: PropTypes.func.isRequired,
 }

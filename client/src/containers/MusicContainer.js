@@ -4,18 +4,18 @@ import Synth from '../../Module/Keyboard';
 var keyboard = new Synth();
 
 var keyMap = {
-  83: "key1",
-  69: "key2",
-  68: "key3",
-  82: "key4",
-  70: "key5",
-  71: "key6",
-  89: "key7",
-  72: "key8",
-  85: "key9",
-  74: "key10",
-  73: "key11",
-  75: "key12"
+  65: "key1",
+  87: "key2",
+  83: "key3",
+  69: "key4",
+  68: "key5",
+  70: "key6",
+  84: "key7",
+  71: "key8",
+  89: "key9",
+  72: "key10",
+  85: "key11",
+  74: "key12"
 }
 
 var waves = ["triangle","square","sine","sawtooth"];
@@ -46,16 +46,6 @@ class MusicContainer extends React.Component {
       key10: "",
       key11: "",
       key12: "",
-      slider: 0,
-      autoWah: 0,
-      bitCrusher: 0,
-      chebyShev: 0,
-      chorus: 0,
-      distortion: 0,
-      feedbackDelay: 0,
-      freeverb: 0,
-      phaser: 0,
-      pingPongDelay: 0
     }
   }
   rightWave() {
@@ -72,36 +62,24 @@ class MusicContainer extends React.Component {
     this.setState({waveForm : wave});
     keyboard.changeWaveLeft();
   }
-
-  volume(value){
-    keyboard.setVolume(value);
-  }
-
-  delay(value){
-    var val = value/10;
-    keyboard.addFeedbackDelay(val);
-  }
-
-  bitCrush(value){
-    keyboard.addBitCrusher(value);
-  }
-  distortion(value){
-    var val = value/10;
-    keyboard.addDistortion(val);
-  }
-
   playNote (input) {
     var keystroke = input.keyCode;
     var oct = this.state.octave;
-    if (keystroke === 65 && this.state.octave > 1){
+    if (keystroke === 81 && this.state.octave > 1) {
       keyboard.downAnOctave();
       oct--;
       this.setState({octave : oct});
     }
-    else if (keystroke === 76 && this.state.octave < 8) {
+    else if (keystroke === 73 && this.state.octave < 8) {
       keyboard.upAnOctave();
       oct++;
       this.setState({octave : oct});
+    }
+    else if (keystroke === 37) {
+      this.leftWave();
+    }
+    else if (keystroke === 39) {
+      this.rightWave();
     }
     else {
       keyboard.play(keystroke);
@@ -129,22 +107,12 @@ class MusicContainer extends React.Component {
     }
   }
 
-  phaser (){
-    keyboard.addBitCrusher();
-    console.log('dist');
-  }
-
   render () {
     return (
       <Music
         onPlayNote={this.playNote}
         onReleaseNote={this.releaseNote}
-        onPhaser={this.phaser}
         keyboardState={this.state}
-        setVolume={this.volume}
-        setBitcrush={this.bitCrush}
-        setDistortion={this.distortion}
-        setDelay={this.delay}
         setWaveFormRight={this.rightWave}
         setWaveFormLeft={this.leftWave}/>
     )
