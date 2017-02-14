@@ -49,6 +49,24 @@ Keyboard.prototype.phaser;
 Keyboard.prototype.pingPongDelay;
 Keyboard.prototype.octave = 3;
 
+Keyboard.prototype.waveForms = ["triangle","square","sine","sawtooth"];
+Keyboard.prototype.waveIndex = 0;
+
+Keyboard.prototype.changeWaveRight = function () {
+  this.waveIndex++;
+  if (this.waveIndex > this.waveForms.length-1) this.waveIndex=0;
+  for (var i = 0; i < 8 ; i++){
+    this.synth.voices[i].oscillator.type=this.waveForms[this.waveIndex];
+  }
+}
+Keyboard.prototype.changeWaveLeft = function () {
+  this.waveIndex--;
+  if (this.waveIndex < 0) this.waveIndex=3;
+  for (var i = 0; i < 8 ; i++){
+    this.synth.voices[i].oscillator.type=this.waveForms[this.waveIndex];
+  }
+}
+
 
 
 Keyboard.prototype.setVolume = function (value){
@@ -93,8 +111,6 @@ Keyboard.prototype.wantToStop = function (note){
 }
 
 Keyboard.prototype.play = function (key) {
-  if (key === 65) this.downAnOctave();
-  if (key === 76) this.upAnOctave();
   var note = this.findNote(key);
   var canPlay = this.wantToPlay(key);
   if (note && canPlay) {

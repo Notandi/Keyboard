@@ -20,18 +20,8 @@ function Music (props) {
         <div className="pianoplacer">
   	    	<div className="piano">
   	    		<div className="effects">
-  	    			<div className="volume">
-              <Slider vertical min={0} max={10} included={false} defaultValue={10} onChange={props.setVolume}/>
-              </div>
-              <div className="bitCrusher">
-                <Slider vertical min={0} max={8} included={false} defaultValue={0} onChange={props.setBitcrush}/>
-              </div>
-              <div className="distortion">
-                <Slider vertical min={0} max={10} included={false} defaultValue={0} onChange={props.setDistortion}/>
-              </div>
-              <div className="delay">
-                <Slider vertical min={0} max={100} included={false} defaultValue={0} onChange={props.setDelay}/>
-              </div>
+              <p className="octave"> oct </p>
+              <p className="octaveNumber">{props.keyboardState.octave}</p>
   	    		</div>
   	    		<div className="keys">
   	    			<div className={'key '+ props.keyboardState.key1}></div>
@@ -49,6 +39,11 @@ function Music (props) {
   	    		</div>
   	    	</div>
       	</div>
+        <div className="waveplacer">
+          <div className="arrowLeft" onClick={props.setWaveFormLeft}></div>
+          <p className="waves">{props.keyboardState.waveForm}</p>
+          <div className="arrowRight" onClick={props.setWaveFormRight}></div>
+        </div>
     </div>
   )
 }
@@ -62,6 +57,8 @@ Music.propTypes = {
   setBitcrush: PropTypes.func.isRequired,
   setDistortion: PropTypes.func.isRequired,
   setDelay: PropTypes.func.isRequired,
+  setWaveFormRight: PropTypes.func.isRequired,
+  setWaveFormLeft: PropTypes.func.isRequired,
 }
 
 module.exports = Music;

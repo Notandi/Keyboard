@@ -17,6 +17,8 @@ var keyMap = {
   73: "key11",
   75: "key12"
 }
+
+var waves = ["triangle","square","sine","sawtooth"];
 class MusicContainer extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -26,7 +28,12 @@ class MusicContainer extends React.Component {
     super(props);
     this.playNote = this.playNote.bind(this);
     this.releaseNote = this.releaseNote.bind(this);
+    this.rightWave = this.rightWave.bind(this);
+    this.leftWave = this.leftWave.bind(this);
     this.state = {
+      octave: 4,
+      waveForm: "triangle",
+      waveIndex: 0,
       key1: "",
       key2: "",
       key3: "",
@@ -51,6 +58,20 @@ class MusicContainer extends React.Component {
       pingPongDelay: 0
     }
   }
+  rightWave() {
+    this.state.waveIndex++;
+    if (this.state.waveIndex > waves.length-1) this.state.waveIndex=0;
+    var wave = waves[this.state.waveIndex];
+    this.setState({waveForm : wave});
+    keyboard.changeWaveRight();
+  }
+  leftWave() {
+    this.state.waveIndex--;
+    if (this.state.waveIndex < 0) this.state.waveIndex=3;
+    var wave = waves[this.state.waveIndex];
+    this.setState({waveForm : wave});
+    keyboard.changeWaveLeft();
+  }
 
   volume(value){
     keyboard.setVolume(value);
@@ -71,14 +92,27 @@ class MusicContainer extends React.Component {
 
   playNote (input) {
     var keystroke = input.keyCode;
-    keyboard.play(keystroke);
-    for (var code in keyMap) {
-      if (Number(code) === Number(keystroke)) {
-          var key = keyMap[code];
-          var obj = {};
-          obj[key] = 'active';
-          this.setState(obj);
-        }
+    var oct = this.state.octave;
+    if (keystroke === 65 && this.state.octave > 1){
+      keyboard.downAnOctave();
+      oct--;
+      this.setState({octave : oct});
+    }
+    else if (keystroke === 76 && this.state.octave < 8) {
+      keyboard.upAnOctave();
+      oct++;
+      this.setState({octave : oct});
+    }
+    else {
+      keyboard.play(keystroke);
+      for (var code in keyMap) {
+        if (Number(code) === Number(keystroke)) {
+            var key = keyMap[code];
+            var obj = {};
+            obj[key] = 'active';
+            this.setState(obj);
+          }
+      }
     }
   }
 
@@ -110,7 +144,9 @@ class MusicContainer extends React.Component {
         setVolume={this.volume}
         setBitcrush={this.bitCrush}
         setDistortion={this.distortion}
-        setDelay={this.delay}/>
+        setDelay={this.delay}
+        setWaveFormRight={this.rightWave}
+        setWaveFormLeft={this.leftWave}/>
     )
   }
 };
