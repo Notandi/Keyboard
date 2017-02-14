@@ -10,32 +10,32 @@ function Keyboard () {
 
 Keyboard.prototype.activekeys = [];
 Keyboard.prototype.keyMap = {
-  65: 'C4',
-  87: 'C#4',
-  83: 'D4',
-  69: 'D#4',
-  68: 'E4',
-  70: 'F4',
-  84: 'F#4',
-  71: 'G4',
-  89: 'G#4',
-  72: 'A4',
-  85: 'A#4',
-  74: 'B4'
+  83: 'C4',
+  69: 'C#4',
+  68: 'D4',
+  82: 'D#4',
+  70: 'E4',
+  71: 'F4',
+  89: 'F#4',
+  72: 'G4',
+  85: 'G#4',
+  74: 'A4',
+  73: 'A#4',
+  75: 'B4'
 };
 Keyboard.prototype.notes = {
-  65: true,
-  87: true,
   83: true,
   69: true,
   68: true,
+  82: true,
   70: true,
-  84: true,
   71: true,
   89: true,
   72: true,
   85: true,
-  74: true
+  74: true,
+  73: true,
+  75: true
 }
 
 Keyboard.prototype.autoWah;
@@ -47,6 +47,8 @@ Keyboard.prototype.feedbackDelay;
 Keyboard.prototype.freeverb;
 Keyboard.prototype.phaser;
 Keyboard.prototype.pingPongDelay;
+Keyboard.prototype.octave = 3;
+
 
 
 Keyboard.prototype.setVolume = function (value){
@@ -91,11 +93,38 @@ Keyboard.prototype.wantToStop = function (note){
 }
 
 Keyboard.prototype.play = function (key) {
+  if (key === 65) this.downAnOctave();
+  if (key === 76) this.upAnOctave();
   var note = this.findNote(key);
   var canPlay = this.wantToPlay(key);
   if (note && canPlay) {
     this.synth.triggerAttack(note,undefined,0.2)
   }
+}
+
+Keyboard.prototype.upAnOctave = function () {
+  if (this.octave < (this.octaves.length-1)){
+    this.synth.triggerRelease(this.noteArray());
+    this.octave++;
+    this.keyMap = this.octaves[this.octave];
+  }
+}
+
+Keyboard.prototype.downAnOctave = function () {
+  if (this.octave > 0){
+    this.synth.triggerRelease(this.noteArray());
+    this.octave--;
+    this.keyMap = this.octaves[this.octave];
+
+  }
+}
+
+Keyboard.prototype.noteArray = function () {
+  var noteArray = []
+  for (name in this.keyMap){
+    noteArray.push(this.keyMap[name]);
+  }
+  return noteArray;
 }
 
 Keyboard.prototype.arpegiate = function () {
@@ -188,6 +217,118 @@ Keyboard.prototype.addPingPongDelay = function () {
   this.pingPongDelay = new Tone.PingPongDelay("4n", 0.2).toMaster();
   this.synth.connect(this.pingPongDelay);
 }
+Keyboard.prototype.octaves = [{
+  83: 'C1',
+  69: 'C#1',
+  68: 'D1',
+  82: 'D#1',
+  70: 'E1',
+  71: 'F1',
+  89: 'F#1',
+  72: 'G1',
+  85: 'G#1',
+  74: 'A1',
+  73: 'A#1',
+  75: 'B1'
+},
+{
+  83: 'C2',
+  69: 'C#2',
+  68: 'D2',
+  82: 'D#2',
+  70: 'E2',
+  71: 'F2',
+  89: 'F#2',
+  72: 'G2',
+  85: 'G#2',
+  74: 'A2',
+  73: 'A#2',
+  75: 'B2'
+},
+{
+  83: 'C3',
+  69: 'C#3',
+  68: 'D3',
+  82: 'D#3',
+  70: 'E3',
+  71: 'F3',
+  89: 'F#3',
+  72: 'G3',
+  85: 'G#3',
+  74: 'A3',
+  73: 'A#3',
+  75: 'B3'
+},
+{
+  83: 'C4',
+  69: 'C#4',
+  68: 'D4',
+  82: 'D#4',
+  70: 'E4',
+  71: 'F4',
+  89: 'F#4',
+  72: 'G4',
+  85: 'G#4',
+  74: 'A4',
+  73: 'A#4',
+  75: 'B4'
+},
+{
+  83: 'C5',
+  69: 'C#5',
+  68: 'D5',
+  82: 'D#5',
+  70: 'E5',
+  71: 'F4',
+  89: 'F#5',
+  72: 'G5',
+  85: 'G#5',
+  74: 'A5',
+  73: 'A#5',
+  75: 'B5'
+},
+{
+  83: 'C6',
+  69: 'C#6',
+  68: 'D6',
+  82: 'D#6',
+  70: 'E6',
+  71: 'F6',
+  89: 'F#6',
+  72: 'G6',
+  85: 'G#6',
+  74: 'A6',
+  73: 'A#6',
+  75: 'B6'
+},
+{
+  83: 'C7',
+  69: 'C#7',
+  68: 'D7',
+  82: 'D#7',
+  70: 'E7',
+  71: 'F7',
+  89: 'F#7',
+  72: 'G7',
+  85: 'G#7',
+  74: 'A7',
+  73: 'A#7',
+  75: 'B7'
+},
+{
+  83: 'C8',
+  69: 'C#8',
+  68: 'D8',
+  82: 'D#8',
+  70: 'E8',
+  71: 'F8',
+  89: 'F#8',
+  72: 'G8',
+  85: 'G#8',
+  74: 'A8',
+  73: 'A#8',
+  75: 'B8'
+}];
 
 
 module.exports = Keyboard;

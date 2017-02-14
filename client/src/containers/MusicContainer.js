@@ -4,20 +4,19 @@ import Synth from '../../Module/Keyboard';
 var keyboard = new Synth();
 
 var keyMap = {
-  65: "key1",
-  87: "key2",
-  83: "key3",
-  69: "key4",
-  68: "key5",
-  70: "key6",
-  84: "key7",
-  71: "key8",
-  89: "key9",
-  72: "key10",
-  85: "key11",
-  74: "key12"
+  83: "key1",
+  69: "key2",
+  68: "key3",
+  82: "key4",
+  70: "key5",
+  71: "key6",
+  89: "key7",
+  72: "key8",
+  85: "key9",
+  74: "key10",
+  73: "key11",
+  75: "key12"
 }
-
 class MusicContainer extends React.Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
