@@ -12,8 +12,8 @@ function Music (props) {
         />
         <div className="textplacer">
           <h1>Keyboard</h1>
-          <p>use the keys "a s d f g h j" to play the white keys and  "w e t y u " to play the black keys</p>
-          <p>use the key "q" to go down an octave and "i" to go up an octave</p>
+          <p>use "a s d f g h j" to play the white keys and  "w e t y u" to play the black keys</p>
+          <p>use "q" to go down an octave and "i" to go up an octave</p>
         </div>
         <a href="https://github.com/Notandi/Keyboard"><img className="github" src="github.svg" alt="github" /></a>
         <div className="pianoplacer">
